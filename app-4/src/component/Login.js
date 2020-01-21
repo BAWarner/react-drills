@@ -14,7 +14,6 @@ class Login extends React.Component{
     }
     loginUser(){
         let {username, password} = this.state;
-        console.log(this.state);
         alert(`User: ${username}\rPassword: ${password}`);
     }
     render(){
