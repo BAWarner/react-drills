@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      unFilteredPie: ['pumpkin', 'apple', 'cherry', 'thunder berry', 'mixed berry', 'chocolate', 'pecan', 'strawberry'],
+      filteredPie: '',
+
+    }
+  }
+  filterPies = (e) => {
+    this.setState({
+      filteredPie: e.target.value
+    });
+  }
+  render(){
+    var pieList = this.state.unFilteredPie
+    .filter(
+      (val) => {
+        return val.includes(this.state.filteredPie)
+      }
+    )
+    .map(
+      (val, i) => {
+        return <h2 key={`pie${i}`}>{val.charAt(0).toUpperCase() + val.substring(1)}</h2>
+      }
+    );
+    return(
+      <div>
+        <input onChange={this.filterPies} type='text' />
+        {pieList}
+      </div>
+    );
+  }
 }
 
 export default App;
